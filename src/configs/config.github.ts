@@ -27,9 +27,8 @@ export const config: Config = {
       nav: 'nav',
       header: 'header',
       footer: 'footer',
-      tags: 'tags',
+      toc: 'toc',
       post: 'post',
-      pin: 'pin',
     },
   },
 
