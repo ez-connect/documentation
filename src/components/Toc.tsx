@@ -23,19 +23,29 @@ export class Toc extends React.PureComponent {
     const data = Parse.toc(item.body);
     return data.map((e, i) => {
       const { level, title, to } = e;
-      const className = `menu-level-${level}`;
+      const className = `toc-level-${level}`;
       if (to) {
         return (
-          <Link key={i} to={Routing.getPostSlug(title, to)}>
-            <MenuItem className={className}>{title}</MenuItem>
-          </Link>
+          <div className="toc">
+            <Link
+              key={i}
+              to={Routing.getPostSlug(title, to)}
+            >
+              <MenuItem className={className}>{title}</MenuItem>
+            </Link>
+          </div>
         );
       }
 
-      return <MenuItem key={i} className={className}>{title}</MenuItem>;
+      return (
+        <div className="toc">
+          <MenuItem key={i} className={className}>
+            {title}
+          </MenuItem>
+        </div>
+      );
     });
   }
-
 
   private async _load() {
     const item = await Service.findToc();
