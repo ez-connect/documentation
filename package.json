@@ -16,9 +16,11 @@
     "git-cms-service": "https://github.com/ez-connect/git-cms-service",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-markdown": "^4.3.1",
     "react-router-dom": "^5.2.0",
     "react-router-scroll-memory": "^2.0.7",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "react-syntax-highlighter": "^13.5.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.4",

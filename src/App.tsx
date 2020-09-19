@@ -5,7 +5,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { config } from './configs';
-import { HomePage } from './pages';
+import { HomePage, PostPage } from './pages';
 
 export class App extends React.PureComponent {
   constructor(props: any) {
@@ -18,6 +18,7 @@ export class App extends React.PureComponent {
     return (
       <BrowserRouter>
         <Switch>
+          <Route path="/:id" component={PostPage} />
           <Route path="/" component={HomePage} />
         </Switch>
       </BrowserRouter>
