@@ -1,6 +1,6 @@
 import './assets/styles/main.css';
 
-import { Grid, Typography } from '@material-ui/core';
+import { Box, Grid, Typography } from '@material-ui/core';
 import { Issue, Routing, Service } from 'git-cms-service';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -32,7 +32,6 @@ export class App extends React.PureComponent<any, State> {
 
   public render() {
     const { ready, toc, post } = this.state;
-    const { title, body } = post ?? {};
     return (
       <BrowserRouter>
         <LinearIndicator enabled={!ready} />
@@ -42,9 +41,9 @@ export class App extends React.PureComponent<any, State> {
             <Toc items={toc} onChanged={this._onChanged} />
           </Grid>
           <Grid item md={7}>
-            <Typography variant="h5">{title}</Typography>
-
-            <ReactMarkdown source={body} renderers={renderers} />
+            <Box m={1}>
+              <ReactMarkdown source={post?.body} renderers={renderers} />
+            </Box>
           </Grid>
         </Grid>
       </BrowserRouter>
