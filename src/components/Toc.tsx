@@ -9,6 +9,7 @@ import { TocItem } from '../utils';
 
 interface Props {
   items?: TocItem[];
+  onChanged: (id: number) => void;
 }
 
 export class Toc extends React.PureComponent<Props> {
@@ -27,6 +28,7 @@ export class Toc extends React.PureComponent<Props> {
             <Link
               key={index}
               to={Routing.getPostSlug(title, to)}
+              onClick={this._onClick(to)}
             >
               <MenuItem className={className}>{title}</MenuItem>
             </Link>
@@ -43,4 +45,8 @@ export class Toc extends React.PureComponent<Props> {
       );
     });
   }
+
+  private _onClick = (value: number) => () => {
+    this.props.onChanged(value);
+  };
 }

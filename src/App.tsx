@@ -1,7 +1,7 @@
 import './assets/styles/main.css';
 
 import { Grid, Typography } from '@material-ui/core';
-import { Issue, Service } from 'git-cms-service';
+import { Issue, Routing, Service } from 'git-cms-service';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { BrowserRouter } from 'react-router-dom';
@@ -39,9 +39,9 @@ export class App extends React.PureComponent<any, State> {
         <NavBar />
         <Grid container direction="row">
           <Grid item md={3}>
-            <Toc items={toc} />
+            <Toc items={toc} onChanged={this._onChanged} />
           </Grid>
-          <Grid item md={9}>
+          <Grid item md={7}>
             <Typography variant="h5">{title}</Typography>
 
             <ReactMarkdown source={body} renderers={renderers} />
@@ -52,6 +52,7 @@ export class App extends React.PureComponent<any, State> {
   }
 
   private async _load() {
+    console.warn(window.location.pathname);
     try {
       this.setState({ ready: false });
       // Table of contents
@@ -60,16 +61,32 @@ export class App extends React.PureComponent<any, State> {
 
       this.setState({ toc });
 
-      // Find first post
-      const menu = toc.find((e) => e.to != null);
-      if (menu && menu.to) {
-        const post = await Service.findOnePost(menu.to);
-        this.setState({ post });
+      // Check router
+      let id = Routing.getPostIdFromPath(window.location.pathname);
+      if (id === 0) {
+        // Find first post
+        const menu = toc.find((e) => e.to != null);
+        if (menu && menu.to) {
+          id = menu.to;
+        }
       }
+
+      const post = await Service.findOnePost(id);
+      this.setState({ post });
     } finally {
       this.setState({ ready: true });
     }
   }
+
+  private _onChanged = async (id: number) => {
+    try {
+      this.setState({ ready: false });
+      const post = await Service.findOnePost(id);
+      this.setState({ post });
+    } finally {
+      this.setState({ ready: true });
+    }
+  };
 }
 
 ///////////////////////////////////////////////////////////////////

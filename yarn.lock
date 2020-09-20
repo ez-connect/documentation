@@ -5173,7 +5173,7 @@ getpass@^0.1.1:
 
 "git-cms-service@https://github.com/ez-connect/git-cms-service":
   version "0.1.0"
-  resolved "https://github.com/ez-connect/git-cms-service#4172f709503a1f0756aa141f7c49002df854952b"
+  resolved "https://github.com/ez-connect/git-cms-service#ee15ac29414d241f48d5bcf4347b0dfb39927f33"
   dependencies:
     axios "^0.20.0"
     buffer "^5.6.0"
