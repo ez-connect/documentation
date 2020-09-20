@@ -1,12 +1,12 @@
-export interface Toc {
+export interface TocItem {
   level: number;
   title: string;
   to?: number;
 }
 
 class Parse {
-  public toc(value: string): Toc[] {
-    const items: Toc[] = [];
+  public toc(value: string): TocItem[] {
+    const items: TocItem[] = [];
     const lines = value.split('\n');
 
     for (const line of lines) {

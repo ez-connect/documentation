@@ -1,7 +1,39 @@
+.nav-title {
+  color: inherit;
+  text-decoration: none;
+  flex-grow: 1;
+}
+
+.nav-search {
+  position: relative;
+}
+
+.nav-search-icon {
+  height: 100%;
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-input-root {
+  color: inherit !important;
+}
+
+.nav-input {
+  padding-left: 2em !important;
+}
+
 .toc > a {
   text-decoration: none;
   color: inherit;
 }
+
+/* .toc > a:hover {
+  text-decoration: underline;
+} */
+
 .toc-level-2 {
   padding-left: 2em !important;
   text-decoration: none !important;

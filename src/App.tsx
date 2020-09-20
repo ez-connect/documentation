@@ -1,27 +1,82 @@
 import './assets/styles/main.css';
 
-import { Service } from 'git-cms-service';
+import { Grid, Typography } from '@material-ui/core';
+import { Issue, Service } from 'git-cms-service';
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import { BrowserRouter } from 'react-router-dom';
 
+import { CodeBlock, NavBar, Toc } from './components';
+import { LinearIndicator } from './components/LinearIndicator';
 import { config } from './configs';
-import { HomePage, PostPage } from './pages';
+import { Parse, TocItem } from './utils';
 
-export class App extends React.PureComponent {
-  constructor(props: any) {
+interface State {
+  ready?: boolean;
+  toc?: TocItem[];
+  post?: Issue;
+}
+
+export class App extends React.PureComponent<any, State> {
+  public state: State = {};
+
+  constructor(props: Readonly<any>) {
     super(props);
     Service.init(config.service);
     // Service.onUnauthorized(this._onUnauthorized);
   }
 
+  public componentDidMount() {
+    this._load();
+  }
+
   public render() {
+    const { ready, toc, post } = this.state;
+    const { title, body } = post ?? {};
     return (
       <BrowserRouter>
-        <Switch>
-          <Route path="/:id" component={PostPage} />
-          <Route path="/" component={HomePage} />
-        </Switch>
+        <LinearIndicator enabled={!ready} />
+        <NavBar />
+        <Grid container direction="row">
+          <Grid item md={3}>
+            <Toc items={toc} />
+          </Grid>
+          <Grid item md={9}>
+            <Typography variant="h5">{title}</Typography>
+
+            <ReactMarkdown source={body} renderers={renderers} />
+          </Grid>
+        </Grid>
       </BrowserRouter>
     );
   }
+
+  private async _load() {
+    try {
+      this.setState({ ready: false });
+      // Table of contents
+      const item = await Service.findToc();
+      const toc = Parse.toc(item.body);
+
+      this.setState({ toc });
+
+      // Find first post
+      const menu = toc.find((e) => e.to != null);
+      if (menu && menu.to) {
+        const post = await Service.findOnePost(menu.to);
+        this.setState({ post });
+      }
+    } finally {
+      this.setState({ ready: true });
+    }
+  }
 }
+
+///////////////////////////////////////////////////////////////////
+
+// https://gist.github.com/boganegru/a4da0b0da0b1233d30b10063b10efa8a
+// https://github.com/rexxars/react-markdown#node-types
+const renderers: { [nodeType: string]: React.ElementType } = {
+  paragraph: (props) => <Typography>{props.children}</Typography>,
+  code: CodeBlock,
+};

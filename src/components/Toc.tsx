@@ -1,34 +1,31 @@
 import './styles.css';
 
 import { MenuItem } from '@material-ui/core';
-import { Issue, Item, Routing, Service } from 'git-cms-service';
+import { Routing } from 'git-cms-service';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Parse } from '../utils';
+import { TocItem } from '../utils';
 
-export class Toc extends React.PureComponent {
-  public state: Item<Issue> = {};
+interface Props {
+  items?: TocItem[];
+}
 
-  public componentDidMount() {
-    this._load();
-  }
-
+export class Toc extends React.PureComponent<Props> {
   public render() {
-    const { item } = this.state;
-    if (!item) {
+    const { items } = this.props;
+    if (!items) {
       return null;
     }
 
-    const data = Parse.toc(item.body);
-    return data.map((e, i) => {
-      const { level, title, to } = e;
+    return items.map((item, index) => {
+      const { level, title, to } = item;
       const className = `toc-level-${level}`;
       if (to) {
         return (
           <div className="toc">
             <Link
-              key={i}
+              key={index}
               to={Routing.getPostSlug(title, to)}
             >
               <MenuItem className={className}>{title}</MenuItem>
@@ -39,16 +36,11 @@ export class Toc extends React.PureComponent {
 
       return (
         <div className="toc">
-          <MenuItem key={i} className={className}>
+          <MenuItem key={index} className={className}>
             {title}
           </MenuItem>
         </div>
       );
     });
-  }
-
-  private async _load() {
-    const item = await Service.findToc();
-    this.setState({ item });
   }
 }
