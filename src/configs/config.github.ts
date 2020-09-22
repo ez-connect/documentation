@@ -34,10 +34,6 @@ export const config: Config = {
 
   router: {
     home: '/',
-    about: '/about',
-    tags: '/tags',
-    posts: '/posts',
-    users: '/users',
     auth: '/auth',
   },
 };

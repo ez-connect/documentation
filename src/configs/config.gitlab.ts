@@ -29,17 +29,12 @@ export const config: Config = {
       nav: 'nav',
       header: 'header',
       footer: 'footer',
-      tags: 'tags',
+      toc: 'toc',
       post: 'post',
-      pin: 'pin',
     },
   },
   router: {
     home: '/',
-    about: '/about',
-    tags: '/tags',
-    posts: '/posts',
-    users: '/users',
     auth: '/auth',
   },
 };
