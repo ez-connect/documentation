@@ -6,7 +6,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { BrowserRouter } from 'react-router-dom';
 
-import { CodeBlock, NavBar, Toc } from './components';
+import { CodeBlock, MarkdownHeading, NavBar, Toc } from './components';
 import { LinearIndicator } from './components/LinearIndicator';
 import { config } from './configs';
 import { Parse, TocItem } from './utils';
@@ -33,7 +33,7 @@ export class App extends React.PureComponent<any, State> {
   public render() {
     const { ready, toc, post } = this.state;
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <LinearIndicator enabled={!ready} />
         <NavBar />
         <Grid container direction="row">
@@ -51,7 +51,6 @@ export class App extends React.PureComponent<any, State> {
   }
 
   private async _load() {
-    console.warn(window.location.pathname);
     try {
       this.setState({ ready: false });
       // Table of contents
@@ -93,6 +92,7 @@ export class App extends React.PureComponent<any, State> {
 // https://gist.github.com/boganegru/a4da0b0da0b1233d30b10063b10efa8a
 // https://github.com/rexxars/react-markdown#node-types
 const renderers: { [nodeType: string]: React.ElementType } = {
+  heading: MarkdownHeading,
   paragraph: (props) => <Typography>{props.children}</Typography>,
   code: CodeBlock,
 };

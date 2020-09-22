@@ -24,9 +24,8 @@ export class Toc extends React.PureComponent<Props> {
       const className = `toc-level-${level}`;
       if (to) {
         return (
-          <div className="toc">
+          <div key={index} className="toc">
             <Link
-              key={index}
               to={Routing.getPostSlug(title, to)}
               onClick={this._onClick(to)}
             >
@@ -37,8 +36,8 @@ export class Toc extends React.PureComponent<Props> {
       }
 
       return (
-        <div className="toc">
-          <MenuItem key={index} className={className}>
+        <div key={index} className="toc">
+          <MenuItem  className={className}>
             {title}
           </MenuItem>
         </div>
