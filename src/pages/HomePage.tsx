@@ -4,8 +4,8 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
 import {
-  CodeBlock,
   LinearIndicator,
+  MarkdownCodeBlock,
   MarkdownHeading,
   MarkdownParagraph,
   MarkdownTable,
@@ -113,7 +113,7 @@ export class HomePage extends React.PureComponent<any, State> {
 const renderers: { [nodeType: string]: React.ElementType } = {
   heading: MarkdownHeading,
   paragraph: MarkdownParagraph,
-  code: CodeBlock,
+  code: MarkdownCodeBlock,
   table: MarkdownTable,
   tableHead: MarkdownTableHead,
   tableBody: MarkdownTableBody,
