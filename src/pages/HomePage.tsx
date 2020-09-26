@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { Issue, Routing, Service } from 'git-cms-service';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -7,6 +7,12 @@ import {
   CodeBlock,
   LinearIndicator,
   MarkdownHeading,
+  MarkdownParagraph,
+  MarkdownTable,
+  MarkdownTableBody,
+  MarkdownTableCell,
+  MarkdownTableHead,
+  MarkdownTableRow,
   NavBar,
   Toc,
 } from '../components';
@@ -34,7 +40,7 @@ export class HomePage extends React.PureComponent<any, State> {
 
         <Grid container direction="row">
           <Grid item md={3}>
-            <Toc items={toc} onChanged={this._onChanged} />
+            <Toc items={toc} selected={post?.id} onChanged={this._onChanged} />
           </Grid>
           <Grid item md={7}>
             <Box m={1}>
@@ -106,6 +112,11 @@ export class HomePage extends React.PureComponent<any, State> {
 // https://github.com/rexxars/react-markdown#node-types
 const renderers: { [nodeType: string]: React.ElementType } = {
   heading: MarkdownHeading,
-  paragraph: (props) => <Typography>{props.children}</Typography>,
+  paragraph: MarkdownParagraph,
   code: CodeBlock,
+  table: MarkdownTable,
+  tableHead: MarkdownTableHead,
+  tableBody: MarkdownTableBody,
+  tableRow: MarkdownTableRow,
+  tableCell: MarkdownTableCell,
 };

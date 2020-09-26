@@ -38,3 +38,7 @@
   padding-left: 2em !important;
   text-decoration: none !important;
 }
+
+.heading {
+  padding-top: 0.5em;
+}

@@ -1,1 +1,2 @@
-export * from './MarkdownHeading';
+export * from './MarkdownTypography';
+export * from './MarkdownTable';

@@ -9,12 +9,13 @@ import { TocItem } from '../utils';
 
 interface Props {
   items?: TocItem[];
+  selected?: number;
   onChanged: (id: number) => void;
 }
 
 export class Toc extends React.PureComponent<Props> {
   public render() {
-    const { items } = this.props;
+    const { items, selected } = this.props;
     if (!items) {
       return null;
     }
@@ -29,7 +30,9 @@ export class Toc extends React.PureComponent<Props> {
               to={Routing.getPostSlug(title, to)}
               onClick={this._onClick(to)}
             >
-              <MenuItem className={className}>{title}</MenuItem>
+              <MenuItem className={className} selected={to === selected}>
+                {title}
+              </MenuItem>
             </Link>
           </div>
         );
@@ -37,9 +40,7 @@ export class Toc extends React.PureComponent<Props> {
 
       return (
         <div key={index} className="toc">
-          <MenuItem  className={className}>
-            {title}
-          </MenuItem>
+          <MenuItem className={className}>{title}</MenuItem>
         </div>
       );
     });

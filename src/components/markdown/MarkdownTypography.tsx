@@ -1,3 +1,5 @@
+import '../styles.css';
+
 import { Typography } from '@material-ui/core';
 import React from 'react';
 
@@ -10,8 +12,18 @@ export class MarkdownHeading extends React.PureComponent<Props> {
     const { level, children } = this.props;
     const variant: any = `h${level + 3}`;
     return (
-      <Typography gutterBottom variant={variant}>
+      <Typography gutterBottom variant={variant} className="heading">
         {children}
+      </Typography>
+    );
+  }
+}
+
+export class MarkdownParagraph extends React.PureComponent<Props> {
+  public render() {
+    return (
+      <Typography>
+        {this.props.children}
       </Typography>
     );
   }
