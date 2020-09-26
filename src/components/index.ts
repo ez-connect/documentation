@@ -1,3 +1,4 @@
+export * from './LinearIndicator';
 export * from './CodeBlock';
 
 export * from './NavBar';

@@ -38,7 +38,6 @@ export class NavBar extends React.PureComponent {
                 root: 'nav-input-root',
                 input: 'nav-input',
               }}
-              inputProps={{ 'aria-label': 'search' }}
             />
           </div>
         </Toolbar>
