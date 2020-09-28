@@ -21,10 +21,16 @@ export class MarkdownHeading extends React.PureComponent<Props> {
 
 export class MarkdownParagraph extends React.PureComponent<Props> {
   public render() {
+    return <Typography>{this.props.children}</Typography>;
+  }
+}
+
+export class MarkdownListItem extends React.PureComponent {
+  public render() {
     return (
-      <Typography>
-        {this.props.children}
-      </Typography>
+      <li>
+        <Typography component="span">{this.props.children}</Typography>
+      </li>
     );
   }
 }

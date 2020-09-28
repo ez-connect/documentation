@@ -7,6 +7,7 @@ import {
   LinearIndicator,
   MarkdownCodeBlock,
   MarkdownHeading,
+  MarkdownListItem,
   MarkdownParagraph,
   MarkdownTable,
   MarkdownTableBody,
@@ -113,6 +114,7 @@ export class HomePage extends React.PureComponent<any, State> {
 const renderers: { [nodeType: string]: React.ElementType } = {
   heading: MarkdownHeading,
   paragraph: MarkdownParagraph,
+  listItem: MarkdownListItem,
   code: MarkdownCodeBlock,
   table: MarkdownTable,
   tableHead: MarkdownTableHead,
