@@ -1,6 +1,6 @@
 import './styles.css';
 
-import { Typography } from '@material-ui/core';
+import { Divider, Typography } from '@material-ui/core';
 import React from 'react';
 
 interface Props {
@@ -32,5 +32,11 @@ export class MarkdownListItem extends React.PureComponent {
         <Typography component="span">{this.props.children}</Typography>
       </li>
     );
+  }
+}
+
+export class MarkdownDivider extends React.PureComponent {
+  public render() {
+    return <Divider />;
   }
 }

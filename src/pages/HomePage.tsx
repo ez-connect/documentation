@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import {
   LinearIndicator,
   MarkdownCodeBlock,
+  MarkdownDivider,
   MarkdownHeading,
   MarkdownListItem,
   MarkdownParagraph,
@@ -63,7 +64,7 @@ export class HomePage extends React.PureComponent<any, State> {
       this.setState({ toc });
 
       // Check router
-      let id = Routing.getPostIdFromPath(window.location.pathname);
+      let id = Routing.getPostIdFromPath(window.location.hash);
       if (id === 0) {
         // Find first post
         const menu = toc.find((e) => e.to != null);
@@ -115,6 +116,7 @@ const renderers: { [nodeType: string]: React.ElementType } = {
   heading: MarkdownHeading,
   paragraph: MarkdownParagraph,
   listItem: MarkdownListItem,
+  thematicBreak: MarkdownDivider,
   code: MarkdownCodeBlock,
   table: MarkdownTable,
   tableHead: MarkdownTableHead,

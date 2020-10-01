@@ -16,7 +16,7 @@ export class App extends React.PureComponent {
   public render() {
     const {home, auth} = config.router;
     return (
-      <HashRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter>
         <Switch>
           <Route path={auth} component={AuthPage} />
           <Route path={home} component={HomePage} />
